@@ -13,9 +13,9 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'], // 解析这些扩展名的文件
     alias: {
-        'vue$': 'vue/dist/vue.esm-bundler.js',
-        '@': path.resolve(__dirname, 'src'),
-      },
+      'vue$': 'vue/dist/vue.esm-bundler.js',
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
   module: {
     rules: [
@@ -37,6 +37,15 @@ module.exports = {
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'], // 处理 SCSS 文件
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|webp)$/, // 处理图片文件
+        loader: 'file-loader', // 使用 file-loader
+        options: {
+          esModule: false,
+          name: '[path][name].[ext]', // 保持原有路径和名称
+          outputPath: 'images/', // 输出到 dist/images 目录
+        },
       },
       // 其他加载器...
     ],
